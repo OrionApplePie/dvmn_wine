@@ -118,29 +118,28 @@
         </div>
         <div class="row">
           {% for beverages_category, beverages in beverages_by_categories.items() %}
-          <div class="col-12 section-title text-center mb-5">
-            <h2 class="d-block">{{ beverages_category }}</h2>
-          </div>
-          {% for beverage in beverages %}
-          <div class="col-lg-4 mb-5 col-md-6">
-            <div class="wine_v_1 text-center pb-4 pt-5">
-              <img src="images/{{ beverage.Картинка }}" alt="Image" class="img-fluid">
-              {% if beverage.Акция %}
-              <img src="assets/profitable.png"
-                style="width:10rem;height: 10rem;position:absolute;right: -20px;top: -20px;">
-              {% endif %}
-              <div>
-                <h3 class="heading mt-3 mb-3 text-dark">{{ beverage.Название }}</h3>
-                <p>
-                  {% if beverage.Сорт %}
-                  Сорт винограда - {{ beverage.Сорт }}<br />
-                  {% endif %}
-                  <span class="price">{{ beverage.Цена }} р.</span>
-                </p>
-              </div>
+            <div class="col-12 section-title text-center mb-5">
+              <h2 class="d-block">{{ beverages_category }}</h2>
             </div>
-          </div>
-          {% endfor %}
+            {% for beverage in beverages %}
+              <div class="col-lg-4 mb-5 col-md-6">
+                <div class="wine_v_1 text-center pb-4 pt-5">
+                  <img src="images/{{ beverage.Картинка }}" alt="Image" class="img-fluid">
+                    {% if beverage.Акция %}
+                      <img src="assets/profitable.png" style="width:10rem;height: 10rem;position:absolute;right: -20px;top: -20px;">
+                    {% endif %}
+                  <div>
+                    <h3 class="heading mt-3 mb-3 text-dark">{{ beverage.Название }}</h3>
+                    <p>
+                      {% if beverage.Сорт %}
+                        Сорт винограда — {{ beverage.Сорт }}<br />
+                      {% endif %}
+                      <span class="price">{{ beverage.Цена }} р.</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
           {% endfor %}
         </div>
       </div>
