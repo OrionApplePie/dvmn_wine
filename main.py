@@ -8,7 +8,7 @@ from jinja2 import Environment, FileSystemLoader, select_autoescape
 from utils import get_age_declension
 
 WINERY_FOUNDATION_YEAR = 1920
-BEVERAGES_DATA_FILE = r'data/wine.xlsx'
+BEVERAGES_FILEPATH = r'data/wine.xlsx'
 
 env = Environment(
     loader=FileSystemLoader('.'),
@@ -21,7 +21,7 @@ winery_age = datetime.now().year - WINERY_FOUNDATION_YEAR
 winery_age_phrase = f' {winery_age} {get_age_declension(winery_age)}'
 
 beverages_df = pd.read_excel(
-    io=BEVERAGES_DATA_FILE,
+    io=BEVERAGES_FILEPATH,
     sheet_name='Лист1',
     na_values='nan',
     keep_default_na=False,
@@ -29,13 +29,13 @@ beverages_df = pd.read_excel(
 
 beverages = beverages_df.to_dict(orient='records')
 
-beverages_categories = defaultdict(list)
+beverages_by_categories = defaultdict(list)
 for beverage in beverages:
-    beverages_categories[beverage['Категория']].append(beverage)
+    beverages_by_categories[beverage['Категория']].append(beverage)
 
 rendered_page = template.render(
     winery_age_phrase=winery_age_phrase,
-    beverages_categories=beverages_categories,
+    beverages_by_categories=beverages_by_categories,
 )
 
 with open('index.html', 'w') as file:
